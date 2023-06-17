@@ -64,20 +64,20 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 
   /* MacOS Command
    * ,-----------------------------------------------------------------------------------------------.
-   * |  F1   |  F2   |  F3   |  F4   |  F5   |  F6   |  F7   |  F8   |  F9   |  F10  |  F11  |  F12  |
+   * | XXXXX |   Q   |   W   | XXXXX |   R   |   T   | XXXXX | XXXXX | XXXXX | XXXXX | XXXXX | XXXXX |
    * |-------+-------+-------+-------+-------+-------+-------+-------+-------+-------+-------+-------|
-   * |  Tab  |       |       |       |       |       |       | Left  | Down  |  Up   | Right |       |
+   * |  Tab  | XXXXX | XXXXX | XXXXX |   F   | XXXXX | XXXXX | Left  | XXXXX | XXXXX | Right | XXXXX |
    * |-------+-------+-------+-------+-------+-------+-------+-------+-------+-------+-------+-------|
-   * | Shift |       |       |       |       |       |       |       | Pg Up | Pg Dn |       |       |
+   * | XXXXX | XXXXX |   X   |   C   |   V   | XXXXX | XXXXX | XXXXX | XXXXX | XXXXX | XXXXX | XXXXX |
    * |-------+-------+-------+-------+-------+-------+-------+-------+-------+-------+-------+-------|
-   * | Ctrl  |       |       |       |       |               |       |       |       |       |       |
+   * | XXXXX | XXXXX | XXXXX |       |       |               |       | XXXXX | XXXXX | XXXXX | XXXXX |
    * `-----------------------------------------------------------------------------------------------'
    */
   [_MACCMD] = LAYOUT_planck_grid(
-      XXXXXXX,  MAC_Q,    MAC_W,    XXXXXXX,  XXXXXXX,  MAC_T,    XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,
-      MAC_TAB,  XXXXXXX,  XXXXXXX,  XXXXXXX,  MAC_F,    XXXXXXX,  XXXXXXX,  MAC_LEFT, XXXXXXX,  MAC_L,  MAC_RGHT,  XXXXXXX,
+      XXXXXXX,  MAC_Q,    MAC_W,    XXXXXXX,  MAC_R,    MAC_T,    XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,
+      MAC_TAB,  XXXXXXX,  XXXXXXX,  XXXXXXX,  MAC_F,    XXXXXXX,  XXXXXXX,  MAC_LEFT, XXXXXXX,  MAC_L,    MAC_RGHT, XXXXXXX,
       XXXXXXX,  XXXXXXX,  MAC_X,    MAC_C,    MAC_V,    XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,
-      XXXXXXX,  XXXXXXX,  XXXXXXX,  _______,  _______,  XXXXXXX,  XXXXXXX,  _______,  XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX
+      XXXXXXX,  XXXXXXX,  XXXXXXX,  _______,  _______,  _______,  _______,  _______,  XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX
   ),
 
   /* Windows
