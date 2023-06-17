@@ -32,7 +32,7 @@ enum planck_layers {
 };
 
 enum planck_keycodes {
-  MACOS = SAFE_RANGE, MAC_TAB, MAC_C, MAC_V, MAC_X, MAC_Q, MAC_W, MAC_F, MAC_T, MAC_L, MAC_RGHT, MAC_LEFT,
+  MACOS = SAFE_RANGE, MAC_TAB, MAC_C, MAC_V, MAC_X, MAC_Q, MAC_W, MAC_F, MAC_T, MAC_L, MAC_R, MAC_RGHT, MAC_LEFT,
   WINDOWS
 };
 
@@ -267,6 +267,15 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
       if (record->event.pressed) {
         register_code(KC_LGUI);
         tap_code(KC_L);
+      } else {
+        unregister_code(KC_LGUI);
+      }
+      return false;
+      break;
+    case MAC_R:
+      if (record->event.pressed) {
+        register_code(KC_LGUI);
+        tap_code(KC_R);
       } else {
         unregister_code(KC_LGUI);
       }
