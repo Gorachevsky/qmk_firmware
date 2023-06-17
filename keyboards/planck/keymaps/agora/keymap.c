@@ -32,7 +32,7 @@ enum planck_layers {
 };
 
 enum planck_keycodes {
-  MACOS = SAFE_RANGE, MACTAB, MACC, MACV, MACX, MACQ, MACW, MACF, MACT,
+  MACOS = SAFE_RANGE, MAC_TAB, MAC_C, MAC_V, MAC_X, MAC_Q, MAC_W, MAC_F, MAC_T, MAC_RGHT, MAC_LEFT,
   WINDOWS
 };
 
@@ -74,9 +74,9 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
    * `-----------------------------------------------------------------------------------------------'
    */
   [_MACCMD] = LAYOUT_planck_grid(
-      XXXXXXX,  MACQ,     MACW,     XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,
-      MACTAB,   XXXXXXX,  XXXXXXX,  XXXXXXX,  MACF,     XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,
-      XXXXXXX,  XXXXXXX,  MACX,     MACC,     MACV,     XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,
+      XXXXXXX,  MAC_Q,    MAC_W,    XXXXXXX,  XXXXXXX,  MAC_T,    XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,
+      MAC_TAB,  XXXXXXX,  XXXXXXX,  XXXXXXX,  MAC_F,    XXXXXXX,  XXXXXXX,  MAC_LEFT, XXXXXXX,  XXXXXXX,  MAC_RGHT,  XXXXXXX,
+      XXXXXXX,  XXXXXXX,  MAC_X,    MAC_C,    MAC_V,    XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,
       XXXXXXX,  XXXXXXX,  XXXXXXX,  _______,  _______,  XXXXXXX,  XXXXXXX,  _______,  XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX
   ),
 
@@ -173,7 +173,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 
 };
 
-layer_state_t layer_state_set_user(layer_state_t staMMU_NEXTMU_NEXTU_NEXTMU_NEXTte) {
+layer_state_t layer_state_set_user(layer_state_t state) {
   return update_tri_layer_state(state, _LOWER, _RAISE, _ADJUST);
 }
 
@@ -191,7 +191,7 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
       }
       return false;
       break;
-    case MACTAB:
+    case MAC_TAB:
       if (record->event.pressed) {
         register_code(KC_LGUI);
         tap_code(KC_TAB);
@@ -200,7 +200,7 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
       }
       return false;
       break;
-    case MACC:
+    case MAC_C:
       if (record->event.pressed) {
         register_code(KC_LGUI);
         tap_code(KC_C);
@@ -209,7 +209,7 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
       }
       return false;
       break;
-    case MACV:
+    case MAC_V:
       if (record->event.pressed) {
         register_code(KC_LGUI);
         tap_code(KC_V);
@@ -218,7 +218,7 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
       }
       return false;
       break;
-    case MACX:
+    case MAC_X:
       if (record->event.pressed) {
         register_code(KC_LGUI);
         tap_code(KC_X);
@@ -227,7 +227,7 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
       }
       return false;
       break;
-    case MACF:
+    case MAC_F:
       if (record->event.pressed) {
         register_code(KC_LGUI);
         tap_code(KC_F);
@@ -236,7 +236,7 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
       }
       return false;
       break;
-    case MACQ:
+    case MAC_Q:
       if (record->event.pressed) {
         register_code(KC_LGUI);
         tap_code(KC_Q);
@@ -245,7 +245,7 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
       }
       return false;
       break;
-    case MACW:
+    case MAC_W:
       if (record->event.pressed) {
         register_code(KC_LGUI);
         tap_code(KC_W);
@@ -254,12 +254,34 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
       }
       return false;
       break;
-    case MACT:
+    case MAC_T:
       if (record->event.pressed) {
         register_code(KC_LGUI);
         tap_code(KC_T);
       } else {
         unregister_code(KC_LGUI);
+      }
+      return false;
+      break;
+    case MAC_RGHT:
+      if (record->event.pressed) {
+        register_code(KC_LGUI);
+        register_code(KC_LALT);
+        tap_code(KC_RGHT);
+      } else {
+        unregister_code(KC_LGUI);
+        unregister_code(KC_LALT);
+      }
+      return false;
+      break;
+    case MAC_LEFT:
+      if (record->event.pressed) {
+        register_code(KC_LGUI);
+        register_code(KC_LALT);
+        tap_code(KC_LEFT);
+      } else {
+        unregister_code(KC_LGUI);
+        unregister_code(KC_LALT);
       }
       return false;
       break;
