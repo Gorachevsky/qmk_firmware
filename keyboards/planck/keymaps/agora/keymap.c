@@ -32,7 +32,8 @@ enum planck_layers {
 };
 
 enum planck_keycodes {
-  MACOS = SAFE_RANGE, MAC_TAB, MAC_C, MAC_V, MAC_X, MAC_Q, MAC_W, MAC_F, MAC_T, MAC_L, MAC_R, MAC_RGHT, MAC_LEFT,
+  MACOS = SAFE_RANGE, MAC_TAB, MAC_C, MAC_V, MAC_X, MAC_Q, MAC_W, MAC_F, MAC_T,
+  MAC_L, MAC_R, MAC_RGHT, MAC_LEFT, MAC_SPC, MAC_MINUS, MAC_PLUS, MAC_FSIZE,
   WINDOWS
 };
 
@@ -59,25 +60,25 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
       KC_ESC,  KC_Q,    KC_W,    KC_E,    KC_R,    KC_T,    KC_Y,    KC_U,    KC_I,    KC_O,    KC_P,    KC_BSPC,
       KC_TAB,  KC_A,    KC_S,    KC_D,    KC_F,    KC_G,    KC_H,    KC_J,    KC_K,    KC_L,    KC_SCLN, KC_QUOT,
       KC_LSFT, KC_Z,    KC_X,    KC_C,    KC_V,    KC_B,    KC_N,    KC_M,    KC_COMM, KC_DOT,  KC_SLSH, KC_RSFT,
-      KC_LCTL, XXXXXXX, KC_LALT, MACCMD,  LOWER,   KC_SPC,  KC_SPC,  RAISE,   KC_LALT, XXXXXXX, XXXXXXX, KC_ENT
+      KC_LCTL, XXXXXXX, KC_LOPT, MACCMD,  LOWER,   KC_SPC,  KC_SPC,  RAISE,   KC_ROPT, XXXXXXX, XXXXXXX, KC_ENT
   ),
 
   /* MacOS Command
    * ,-----------------------------------------------------------------------------------------------.
-   * | XXXXX |   Q   |   W   | XXXXX |   R   |   T   | XXXXX | XXXXX | XXXXX | XXXXX | XXXXX | XXXXX |
+   * | XXXXX |   Q   |   W   | XXXXX |   R   |   T   | XXXXX | XXXXX | XXXXX | Minus | Plus  | FSize |
    * |-------+-------+-------+-------+-------+-------+-------+-------+-------+-------+-------+-------|
-   * |  Tab  | XXXXX | XXXXX | XXXXX |   F   | XXXXX | XXXXX | Left  | XXXXX | XXXXX | Right | XXXXX |
+   * |  Tab  | XXXXX | XXXXX | XXXXX |   F   | XXXXX | XXXXX | Left  | XXXXX |   L   | Right | XXXXX |
    * |-------+-------+-------+-------+-------+-------+-------+-------+-------+-------+-------+-------|
    * | XXXXX | XXXXX |   X   |   C   |   V   | XXXXX | XXXXX | XXXXX | XXXXX | XXXXX | XXXXX | XXXXX |
    * |-------+-------+-------+-------+-------+-------+-------+-------+-------+-------+-------+-------|
-   * | XXXXX | XXXXX | XXXXX |       |       |               |       | XXXXX | XXXXX | XXXXX | XXXXX |
+   * | XXXXX | XXXXX | XXXXX |       |       |     Space     |       | XXXXX | XXXXX | XXXXX | XXXXX |
    * `-----------------------------------------------------------------------------------------------'
    */
   [_MACCMD] = LAYOUT_planck_grid(
-      XXXXXXX,  MAC_Q,    MAC_W,    XXXXXXX,  MAC_R,    MAC_T,    XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,
-      MAC_TAB,  XXXXXXX,  XXXXXXX,  XXXXXXX,  MAC_F,    XXXXXXX,  XXXXXXX,  MAC_LEFT, XXXXXXX,  MAC_L,    MAC_RGHT, XXXXXXX,
-      XXXXXXX,  XXXXXXX,  MAC_X,    MAC_C,    MAC_V,    XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,
-      XXXXXXX,  XXXXXXX,  XXXXXXX,  _______,  _______,  _______,  _______,  _______,  XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX
+      XXXXXXX,  MAC_Q,    MAC_W,    XXXXXXX,  MAC_R,    MAC_T,    XXXXXXX,  XXXXXXX,  XXXXXXX,  MAC_MINUS,  MAC_PLUS, MAC_FSIZE,
+      MAC_TAB,  XXXXXXX,  XXXXXXX,  XXXXXXX,  MAC_F,    XXXXXXX,  XXXXXXX,  MAC_LEFT, XXXXXXX,  MAC_L,      MAC_RGHT, XXXXXXX,
+      XXXXXXX,  XXXXXXX,  MAC_X,    MAC_C,    MAC_V,    XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,    XXXXXXX,  XXXXXXX,
+      XXXXXXX,  XXXXXXX,  XXXXXXX,  _______,  _______,  MAC_SPC,  MAC_SPC,  _______,  XXXXXXX,  XXXXXXX,    XXXXXXX,  XXXXXXX
   ),
 
   /* Windows
@@ -167,7 +168,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   [_ADJUST] = LAYOUT_planck_grid(
       _______, QK_BOOT, DB_TOGG, RGB_TOG, RGB_MOD, RGB_HUI, RGB_HUD, RGB_SAI, RGB_SAD, RGB_VAI, RGB_VAD, KC_DEL ,
       _______, _______, MU_NEXT, AU_ON,   AU_OFF,  MU_ON,   MU_OFF,  MACOS,   WINDOWS, GAMING,  _______, _______,
-      _______, AU_PREV, AU_NEXT, XXXXXXX, CK_ON, MI_ON,   MI_OFF,  CK_UP, CK_DOWN, _______, _______, _______,
+      _______, AU_PREV, AU_NEXT, XXXXXXX, CK_ON,   MI_ON,   MI_OFF,  AG_NORM, CK_DOWN, _______, _______, _______,
       _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______
   )
 
@@ -300,6 +301,35 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
       } else {
         unregister_code(KC_LGUI);
         unregister_code(KC_LALT);
+      }
+      return false;
+      break; 
+    case MAC_MINUS:
+      if (record->event.pressed) {
+        register_code(KC_LGUI); 
+        tap_code(KC_LSFT);
+        tap_code(KC_MINS);
+      } else {
+        unregister_code(KC_LGUI);
+      }
+      return false;
+      break;
+    case MAC_FSIZE:
+      if (record->event.pressed) {
+        register_code(KC_LGUI); 
+        tap_code(KC_LSFT);
+        tap_code(KC_0);
+      } else {
+        unregister_code(KC_LGUI);
+      }
+      return false;
+      break;
+    case MAC_SPC:
+      if (record->event.pressed) {
+        register_code(KC_LGUI); 
+        tap_code(KC_SPC); 
+      } else {
+        unregister_code(KC_LGUI);
       }
       return false;
       break;
