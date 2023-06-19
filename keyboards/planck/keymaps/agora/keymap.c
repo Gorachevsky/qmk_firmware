@@ -32,8 +32,8 @@ enum planck_layers {
 };
 
 enum planck_keycodes {
-  MACOS = SAFE_RANGE, MAC_TAB, MAC_C, MAC_V, MAC_X, MAC_Q, MAC_W, MAC_F, MAC_T,
-  MAC_L, MAC_R, MAC_RGHT, MAC_LEFT, MAC_SPC, MAC_MINUS, MAC_PLUS, MAC_FSIZE, MAC_J,
+  MACOS = SAFE_RANGE, MAC_TAB, MAC_C, MAC_V, MAC_X, MAC_Q, MAC_W, MAC_F, MAC_T, MAC_Z,
+  MAC_L, MAC_R, MAC_RGHT, MAC_LEFT, MAC_SPC, MAC_MINUS, MAC_PLUS, MAC_FSIZE, MAC_J, MAC_S,
   WINDOWS
 };
 
@@ -67,7 +67,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
    * ,-----------------------------------------------------------------------------------------------.
    * | XXXXX |   Q   |   W   | XXXXX |   R   |   T   | XXXXX | XXXXX | XXXXX | Minus | Plus  | FSize |
    * |-------+-------+-------+-------+-------+-------+-------+-------+-------+-------+-------+-------|
-   * |  Tab  | XXXXX | XXXXX | XXXXX |   F   | XXXXX | XXXXX | Left  | XXXXX |   L   | Right | XXXXX |
+   * |  Tab  | XXXXX |   S   | XXXXX |   F   | XXXXX | XXXXX | Left  | XXXXX |   L   | Right | XXXXX |
    * |-------+-------+-------+-------+-------+-------+-------+-------+-------+-------+-------+-------|
    * | XXXXX | XXXXX |   X   |   C   |   V   | XXXXX | XXXXX | XXXXX | XXXXX | XXXXX | XXXXX | XXXXX |
    * |-------+-------+-------+-------+-------+-------+-------+-------+-------+-------+-------+-------|
@@ -76,8 +76,8 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
    */
   [_MACCMD] = LAYOUT_planck_grid(
       XXXXXXX,  MAC_Q,    MAC_W,    XXXXXXX,  MAC_R,    MAC_T,    XXXXXXX,  XXXXXXX,  XXXXXXX,  MAC_MINUS,  MAC_PLUS, MAC_FSIZE,
-      MAC_TAB,  XXXXXXX,  XXXXXXX,  XXXXXXX,  MAC_F,    XXXXXXX,  XXXXXXX,  MAC_J,    XXXXXXX,  MAC_L,      XXXXXXX,  XXXXXXX,
-      XXXXXXX,  XXXXXXX,  MAC_X,    MAC_C,    MAC_V,    XXXXXXX,  XXXXXXX,  MAC_LEFT, XXXXXXX,  XXXXXXX,    MAC_RGHT, XXXXXXX,
+      MAC_TAB,  XXXXXXX,  MAC_S,    XXXXXXX,  MAC_F,    XXXXXXX,  XXXXXXX,  MAC_J,    XXXXXXX,  MAC_L,      XXXXXXX,  XXXXXXX,
+      XXXXXXX,  MAC_Z,    MAC_X,    MAC_C,    MAC_V,    XXXXXXX,  XXXXXXX,  MAC_LEFT, XXXXXXX,  XXXXXXX,    MAC_RGHT, XXXXXXX,
       XXXXXXX,  XXXXXXX,  XXXXXXX,  _______,  _______,  MAC_SPC,  MAC_SPC,  _______,  XXXXXXX,  XXXXXXX,    XXXXXXX,  XXXXXXX
   ),
 
@@ -228,6 +228,15 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
       }
       return false;
       break;
+    case MAC_Z:
+      if (record->event.pressed) {
+        register_code(KC_LGUI);
+        tap_code(KC_Z);
+      } else {
+        unregister_code(KC_LGUI);
+      }
+      return false;
+      break;
     case MAC_F:
       if (record->event.pressed) {
         register_code(KC_LGUI);
@@ -337,6 +346,15 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
       if (record->event.pressed) {
         register_code(KC_LGUI); 
         tap_code(KC_J); 
+      } else {
+        unregister_code(KC_LGUI);
+      }
+      return false;
+      break;
+    case MAC_S:
+      if (record->event.pressed) {
+        register_code(KC_LGUI); 
+        tap_code(KC_S); 
       } else {
         unregister_code(KC_LGUI);
       }
