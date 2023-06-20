@@ -32,8 +32,8 @@ enum planck_layers {
 };
 
 enum planck_keycodes {
-  MACOS = SAFE_RANGE, MAC_TAB, MAC_C, MAC_V, MAC_X, MAC_Q, MAC_W, MAC_F, MAC_T, MAC_Z,
-  MAC_L, MAC_R, MAC_RGHT, MAC_LEFT, MAC_SPC, MAC_MINUS, MAC_PLUS, MAC_FSIZE, MAC_J, MAC_S,
+  MACOS = SAFE_RANGE, MAC_TAB, MAC_C, MAC_V, MAC_X, MAC_Q, MAC_W, MAC_F, MAC_T, MAC_Z, MAC_SCREEN,
+  MAC_L, MAC_R, MAC_RGHT, MAC_LEFT, MAC_SPC, MAC_MINUS, MAC_PLUS, MAC_FSIZE, MAC_J, MAC_S, MAC_E, MAC_D,
   WINDOWS
 };
 
@@ -75,10 +75,10 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
    * `-----------------------------------------------------------------------------------------------'
    */
   [_MACCMD] = LAYOUT_planck_grid(
-      XXXXXXX,  MAC_Q,    MAC_W,    XXXXXXX,  MAC_R,    MAC_T,    XXXXXXX,  XXXXXXX,  XXXXXXX,  MAC_MINUS,  MAC_PLUS, MAC_FSIZE,
-      MAC_TAB,  XXXXXXX,  MAC_S,    XXXXXXX,  MAC_F,    XXXXXXX,  XXXXXXX,  MAC_J,    XXXXXXX,  MAC_L,      XXXXXXX,  XXXXXXX,
-      XXXXXXX,  MAC_Z,    MAC_X,    MAC_C,    MAC_V,    XXXXXXX,  XXXXXXX,  MAC_LEFT, XXXXXXX,  XXXXXXX,    MAC_RGHT, XXXXXXX,
-      XXXXXXX,  XXXXXXX,  XXXXXXX,  _______,  _______,  MAC_SPC,  MAC_SPC,  _______,  XXXXXXX,  XXXXXXX,    XXXXXXX,  XXXXXXX
+      MAC_SCREEN, MAC_Q,    MAC_W,    MAC_E,  MAC_R,    MAC_T,    XXXXXXX,  XXXXXXX,  XXXXXXX,  MAC_MINUS,  MAC_PLUS, MAC_FSIZE,
+      MAC_TAB,    XXXXXXX,  MAC_S,    MAC_D,  MAC_F,    XXXXXXX,  XXXXXXX,  MAC_J,    XXXXXXX,  MAC_L,      XXXXXXX,  XXXXXXX,
+      XXXXXXX,    MAC_Z,    MAC_X,    MAC_C,    MAC_V,    XXXXXXX,  XXXXXXX,  MAC_LEFT, XXXXXXX,  XXXXXXX,    MAC_RGHT, XXXXXXX,
+      XXXXXXX,    XXXXXXX,  XXXXXXX,  _______,  _______,  MAC_SPC,  MAC_SPC,  _______,  XXXXXXX,  XXXXXXX,    XXXXXXX,  XXXXXXX
   ),
 
   /* Windows
@@ -357,6 +357,35 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
         tap_code(KC_S); 
       } else {
         unregister_code(KC_LGUI);
+      }
+      return false;
+      break;
+    case MAC_SCREEN:
+      if (record->event.pressed) {
+        register_code(KC_LGUI);
+        register_code(KC_LSFT);
+        tap_code(KC_5); 
+      } else {
+        unregister_code(KC_LGUI);
+        unregister_code(KC_LSFT);
+      }
+      return false;
+      break;
+    case MAC_D:
+      if (record->event.pressed) {
+        register_code(KC_LGUI);
+        tap_code(KC_D); 
+      } else {
+        unregister_code(KC_LGUI); 
+      }
+      return false;
+      break;
+    case MAC_E:
+      if (record->event.pressed) {
+        register_code(KC_LGUI);
+        tap_code(KC_E); 
+      } else {
+        unregister_code(KC_LGUI); 
       }
       return false;
       break;
